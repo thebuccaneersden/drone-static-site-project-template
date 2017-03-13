@@ -1,0 +1,33 @@
+platform: linux/arm
+
+pipeline:
+
+  clone:
+    image: armswarmdrone/git
+    when:
+      branch: master
+
+  build:
+    image: sandlayth/arm-nginx-php-fpm
+    commands:
+      - rm -f .gitignore
+      - rm -f .drone.yml
+      - rm -f composer.*
+      - rm -f README.md
+      - echo "[✓] Cleaned up a few files before going to production" > /dev/null
+      - echo "[✓] Publishing changes for foo.com to production" > /dev/null
+    when:
+      branch: master
+
+  deploy:
+    image: thebuccaneersden/drone-rsync:latest
+    hosts: [ "foo.com" ]
+    port: ""
+    key: ""
+    user: ""
+    source: "./"
+    target: "/home/webserver/docker-volumes/foo.com"
+    exclude: [ "**.git" ]
+    deleteafter: "true"
+    when:
+      branch: master
