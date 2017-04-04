@@ -19,15 +19,18 @@ pipeline:
     when:
       branch: master
 
-  deploy:
-    image: thebuccaneersden/drone-rsync:latest
-    hosts: [ "foo.com" ]
-    port: ""
-    key: ""
-    user: ""
-    source: "./"
-    target: "/home/webserver/docker-volumes/foo.com"
-    exclude: [ "**.git" ]
-    deleteafter: "true"
-    when:
-      branch: master
+  ###
+  # DEPLOYMENT STEP - fill in the details when set up
+  ###
+  # deploy:
+  #   image: thebuccaneersden/drone-rsync:latest
+  #   hosts: [ "foo.com" ]
+  #   port: ""
+  #   key: ""
+  #   user: ""
+  #   source: "./"
+  #   target: "/home/webserver/docker-volumes/foo.com"
+  #   exclude: [ "**.git" ]
+  #   deleteafter: "true"
+  #   when:
+  #     branch: master
